@@ -1,0 +1,15 @@
+module: ietf-power-energy-base
+
+  grouping power-and-energy-attributes:
+    +-- power
+    |  +-- instantaneous-power?    int64
+    |  +-- nameplate-power?        uint32
+    |  +-- data-source-accuracy?   identityref
+    |  +-- power-factor?           power-factor
+    |  +-- measurement-local?      boolean
+    +-- energy
+       +-- total-energy-consumed?    uint64
+       +-- total-energy-delivered?   uint64
+       +-- data-source-accuracy?     identityref
+       +-- measurement-local?        boolean
+       +-- certifications*           identityref
