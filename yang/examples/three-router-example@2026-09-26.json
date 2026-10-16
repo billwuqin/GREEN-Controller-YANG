@@ -1,0 +1,610 @@
+{
+  "ietf-yang-instance-data:instance-data-set": {
+    "name": "three-router-example",
+    "content-schema": {
+      "module": [
+        "ietf-network@2018-02-26",
+        "ietf-network-topology@2018-02-26",
+        "ietf-network-inventory-topology@2026-09-11",
+        "ietf-network-inventory@2026-05-27",
+        "ietf-power-energy-base@2026-09-26",
+        "ietf-power-energy-network@2026-09-26"
+      ]
+    },
+    "revision": [
+      {
+        "date": "2026-09-26",
+        "description": "Initial version"
+      }
+    ],
+    "description": [
+      "Three-router example with separate underlay and energy networks"
+    ],
+    "content-data": {
+      "ietf-network:networks": {
+        "network": [
+          {
+            "network-id": "green-underlay-1",
+            "network-types": {
+              "ietf-network-inventory-topology:inventory-topology": {}
+            },
+            "node": [
+              {
+                "node-id": "r1"
+              },
+              {
+                "node-id": "r2"
+              },
+              {
+                "node-id": "r3"
+              },
+              {
+                "node-id": "phone-a"
+              },
+              {
+                "node-id": "phone-b"
+              },
+              {
+                "node-id": "ap-c"
+              }
+            ],
+            "ietf-network-topology:link": [
+              {
+                "link-id": "r1-r2",
+                "source": {
+                  "source-node": "r1"
+                },
+                "destination": {
+                  "dest-node": "r2"
+                },
+                "ietf-network-inventory-topology:inventory-mapping-attributes": {
+                  "link-type": "ietf-network-inventory-topology:fiber"
+                }
+              },
+              {
+                "link-id": "r2-r3",
+                "source": {
+                  "source-node": "r2"
+                },
+                "destination": {
+                  "dest-node": "r3"
+                },
+                "ietf-network-inventory-topology:inventory-mapping-attributes": {
+                  "link-type": "ietf-network-inventory-topology:fiber"
+                }
+              },
+              {
+                "link-id": "r3-r1",
+                "source": {
+                  "source-node": "r3"
+                },
+                "destination": {
+                  "dest-node": "r1"
+                },
+                "ietf-network-inventory-topology:inventory-mapping-attributes": {
+                  "link-type": "ietf-network-inventory-topology:fiber"
+                }
+              },
+              {
+                "link-id": "r1-phone-a",
+                "source": {
+                  "source-node": "r1"
+                },
+                "destination": {
+                  "dest-node": "phone-a"
+                },
+                "ietf-network-inventory-topology:inventory-mapping-attributes": {
+                  "link-type": "ietf-network-inventory-topology:copper"
+                }
+              },
+              {
+                "link-id": "r2-phone-b",
+                "source": {
+                  "source-node": "r2"
+                },
+                "destination": {
+                  "dest-node": "phone-b"
+                },
+                "ietf-network-inventory-topology:inventory-mapping-attributes": {
+                  "link-type": "ietf-network-inventory-topology:copper"
+                }
+              },
+              {
+                "link-id": "r3-ap-c",
+                "source": {
+                  "source-node": "r3"
+                },
+                "destination": {
+                  "dest-node": "ap-c"
+                },
+                "ietf-network-inventory-topology:inventory-mapping-attributes": {
+                  "link-type": "ietf-network-inventory-topology:copper"
+                }
+              }
+            ]
+          },
+          {
+            "network-id": "green-energy-1",
+            "network-types": {
+              "ietf-power-energy-network:energy-network": {}
+            },
+            "node": [
+              {
+                "node-id": "r1",
+                "ietf-power-energy-network:energy-node-attributes": {
+                  "references": {
+                    "ref-string": "router-1",
+                    "ref-ietf-hw": "r1-chassis"
+                  },
+                  "power": {
+                    "instantaneous-power": 165000,
+                    "nameplate-power": 450,
+                    "data-source-accuracy": "ietf-power-energy-base:accuracy-measured-gold-10"
+                  },
+                  "energy": {
+                    "total-energy-consumed": 2840,
+                    "data-source-accuracy": "ietf-power-energy-base:accuracy-measured-gold-10"
+                  },
+                  "component": [
+                    {
+                      "component-id": "chassis",
+                      "references": {
+                        "ref-ietf-hw": "r1-chassis"
+                      },
+                      "power": {
+                        "instantaneous-power": 145000,
+                        "nameplate-power": 350,
+                        "data-source-accuracy": "ietf-power-energy-base:accuracy-measured-gold-10"
+                      },
+                      "energy": {
+                        "total-energy-consumed": 2200,
+                        "data-source-accuracy": "ietf-power-energy-base:accuracy-measured-gold-10"
+                      },
+                      "relationship": [
+                        {
+                          "type": "ietf-power-energy-base:powering",
+                          "peer-node": "r1",
+                          "peer-component": [
+                            {
+                              "peer-component": "lc1",
+                              "details": "backplane feed"
+                            },
+                            {
+                              "peer-component": "lc2",
+                              "details": "backplane feed"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "component-id": "lc1",
+                      "references": {
+                        "ref-ietf-hw": "r1-lc1"
+                      },
+                      "power": {
+                        "instantaneous-power": 8000,
+                        "nameplate-power": 50,
+                        "data-source-accuracy": "ietf-power-energy-base:accuracy-measured-silver-1"
+                      },
+                      "relationship": [
+                        {
+                          "type": "ietf-power-energy-base:powered-by",
+                          "peer-node": "r1",
+                          "peer-component": [
+                            {
+                              "peer-component": "chassis",
+                              "details": "backplane feed"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "ietf-power-energy-base:powering",
+                          "peer-node": "phone-a",
+                          "peer-component": [
+                            {
+                              "peer-component": "phone-main",
+                              "details": "PoE to phone-a"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "component-id": "lc2",
+                      "references": {
+                        "ref-ietf-hw": "r1-lc2"
+                      },
+                      "power": {
+                        "instantaneous-power": 7500,
+                        "nameplate-power": 50,
+                        "data-source-accuracy": "ietf-power-energy-base:accuracy-measured-silver-1"
+                      },
+                      "relationship": [
+                        {
+                          "type": "ietf-power-energy-base:powered-by",
+                          "peer-node": "r1",
+                          "peer-component": [
+                            {
+                              "peer-component": "chassis",
+                              "details": "backplane feed"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "component-id": "psu1",
+                      "references": {
+                        "ref-ietf-hw": "r1-psu1"
+                      },
+                      "power": {
+                        "instantaneous-power": 6200,
+                        "nameplate-power": 30,
+                        "data-source-accuracy": "ietf-power-energy-base:accuracy-measured-silver-1"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "node-id": "r2",
+                "ietf-power-energy-network:energy-node-attributes": {
+                  "references": {
+                    "ref-string": "router-2",
+                    "ref-ietf-hw": "r2-chassis"
+                  },
+                  "power": {
+                    "instantaneous-power": 162000,
+                    "nameplate-power": 450,
+                    "data-source-accuracy": "ietf-power-energy-base:accuracy-measured-gold-10"
+                  },
+                  "energy": {
+                    "total-energy-consumed": 2790,
+                    "data-source-accuracy": "ietf-power-energy-base:accuracy-measured-gold-10"
+                  },
+                  "component": [
+                    {
+                      "component-id": "chassis",
+                      "references": {
+                        "ref-ietf-hw": "r2-chassis"
+                      },
+                      "power": {
+                        "instantaneous-power": 143000,
+                        "nameplate-power": 350,
+                        "data-source-accuracy": "ietf-power-energy-base:accuracy-measured-gold-10"
+                      },
+                      "relationship": [
+                        {
+                          "type": "ietf-power-energy-base:powering",
+                          "peer-node": "r2",
+                          "peer-component": [
+                            {
+                              "peer-component": "lc1",
+                              "details": "backplane feed"
+                            },
+                            {
+                              "peer-component": "lc2",
+                              "details": "backplane feed"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "component-id": "lc1",
+                      "references": {
+                        "ref-ietf-hw": "r2-lc1"
+                      },
+                      "power": {
+                        "instantaneous-power": 7800,
+                        "nameplate-power": 50,
+                        "data-source-accuracy": "ietf-power-energy-base:accuracy-measured-silver-1"
+                      },
+                      "relationship": [
+                        {
+                          "type": "ietf-power-energy-base:powered-by",
+                          "peer-node": "r2",
+                          "peer-component": [
+                            {
+                              "peer-component": "chassis",
+                              "details": "backplane feed"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "ietf-power-energy-base:powering",
+                          "peer-node": "phone-b",
+                          "peer-component": [
+                            {
+                              "peer-component": "phone-main",
+                              "details": "PoE to phone-b"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "component-id": "lc2",
+                      "references": {
+                        "ref-ietf-hw": "r2-lc2"
+                      },
+                      "power": {
+                        "instantaneous-power": 7300,
+                        "nameplate-power": 50,
+                        "data-source-accuracy": "ietf-power-energy-base:accuracy-measured-silver-1"
+                      },
+                      "relationship": [
+                        {
+                          "type": "ietf-power-energy-base:powered-by",
+                          "peer-node": "r2",
+                          "peer-component": [
+                            {
+                              "peer-component": "chassis",
+                              "details": "backplane feed"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "component-id": "psu1",
+                      "references": {
+                        "ref-ietf-hw": "r2-psu1"
+                      },
+                      "power": {
+                        "instantaneous-power": 6100,
+                        "nameplate-power": 30,
+                        "data-source-accuracy": "ietf-power-energy-base:accuracy-measured-silver-1"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "node-id": "r3",
+                "ietf-power-energy-network:energy-node-attributes": {
+                  "references": {
+                    "ref-string": "router-3",
+                    "ref-ietf-hw": "r3-chassis"
+                  },
+                  "power": {
+                    "instantaneous-power": 168000,
+                    "nameplate-power": 450,
+                    "data-source-accuracy": "ietf-power-energy-base:accuracy-measured-gold-10"
+                  },
+                  "energy": {
+                    "total-energy-consumed": 2905,
+                    "data-source-accuracy": "ietf-power-energy-base:accuracy-measured-gold-10"
+                  },
+                  "component": [
+                    {
+                      "component-id": "chassis",
+                      "references": {
+                        "ref-ietf-hw": "r3-chassis"
+                      },
+                      "power": {
+                        "instantaneous-power": 147000,
+                        "nameplate-power": 350,
+                        "data-source-accuracy": "ietf-power-energy-base:accuracy-measured-gold-10"
+                      },
+                      "relationship": [
+                        {
+                          "type": "ietf-power-energy-base:powering",
+                          "peer-node": "r3",
+                          "peer-component": [
+                            {
+                              "peer-component": "lc1",
+                              "details": "backplane feed"
+                            },
+                            {
+                              "peer-component": "lc2",
+                              "details": "backplane feed"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "component-id": "lc1",
+                      "references": {
+                        "ref-ietf-hw": "r3-lc1"
+                      },
+                      "power": {
+                        "instantaneous-power": 8100,
+                        "nameplate-power": 50,
+                        "data-source-accuracy": "ietf-power-energy-base:accuracy-measured-silver-1"
+                      },
+                      "relationship": [
+                        {
+                          "type": "ietf-power-energy-base:powered-by",
+                          "peer-node": "r3",
+                          "peer-component": [
+                            {
+                              "peer-component": "chassis",
+                              "details": "backplane feed"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "component-id": "lc2",
+                      "references": {
+                        "ref-ietf-hw": "r3-lc2"
+                      },
+                      "power": {
+                        "instantaneous-power": 7600,
+                        "nameplate-power": 50,
+                        "data-source-accuracy": "ietf-power-energy-base:accuracy-measured-silver-1"
+                      },
+                      "relationship": [
+                        {
+                          "type": "ietf-power-energy-base:powered-by",
+                          "peer-node": "r3",
+                          "peer-component": [
+                            {
+                              "peer-component": "chassis",
+                              "details": "backplane feed"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "ietf-power-energy-base:powering",
+                          "peer-node": "ap-c",
+                          "peer-component": [
+                            {
+                              "peer-component": "ap-main",
+                              "details": "PoE to access point"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "component-id": "psu1",
+                      "references": {
+                        "ref-ietf-hw": "r3-psu1"
+                      },
+                      "power": {
+                        "instantaneous-power": 6300,
+                        "nameplate-power": 30,
+                        "data-source-accuracy": "ietf-power-energy-base:accuracy-measured-silver-1"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "node-id": "phone-a",
+                "ietf-power-energy-network:energy-node-attributes": {
+                  "references": {
+                    "ref-string": "1234"
+                  },
+                  "power": {
+                    "instantaneous-power": 4800,
+                    "nameplate-power": 15,
+                    "data-source-accuracy": "ietf-power-energy-base:accuracy-measured-silver-1"
+                  },
+                  "energy": {
+                    "total-energy-consumed": 120,
+                    "data-source-accuracy": "ietf-power-energy-base:accuracy-measured-silver-1"
+                  },
+                  "component": [
+                    {
+                      "component-id": "phone-main",
+                      "references": {
+                        "ref-string": "1234"
+                      },
+                      "power": {
+                        "instantaneous-power": 4800,
+                        "nameplate-power": 15,
+                        "data-source-accuracy": "ietf-power-energy-base:accuracy-measured-silver-1"
+                      },
+                      "relationship": [
+                        {
+                          "type": "ietf-power-energy-base:powered-by",
+                          "peer-node": "r1",
+                          "peer-component": [
+                            {
+                              "peer-component": "lc1",
+                              "details": "PoE source on router r1 line card"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "node-id": "phone-b",
+                "ietf-power-energy-network:energy-node-attributes": {
+                  "references": {
+                    "ref-string": "5678"
+                  },
+                  "power": {
+                    "instantaneous-power": 4700,
+                    "nameplate-power": 15,
+                    "data-source-accuracy": "ietf-power-energy-base:accuracy-measured-silver-1"
+                  },
+                  "energy": {
+                    "total-energy-consumed": 115,
+                    "data-source-accuracy": "ietf-power-energy-base:accuracy-measured-silver-1"
+                  },
+                  "component": [
+                    {
+                      "component-id": "phone-main",
+                      "references": {
+                        "ref-string": "5678"
+                      },
+                      "power": {
+                        "instantaneous-power": 4700,
+                        "nameplate-power": 15,
+                        "data-source-accuracy": "ietf-power-energy-base:accuracy-measured-silver-1"
+                      },
+                      "relationship": [
+                        {
+                          "type": "ietf-power-energy-base:powered-by",
+                          "peer-node": "r2",
+                          "peer-component": [
+                            {
+                              "peer-component": "lc1",
+                              "details": "PoE source on router r2 line card"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "node-id": "ap-c",
+                "ietf-power-energy-network:energy-node-attributes": {
+                  "references": {
+                    "ref-string": "ap-local-17"
+                  },
+                  "power": {
+                    "instantaneous-power": 7300,
+                    "nameplate-power": 20,
+                    "data-source-accuracy": "ietf-power-energy-base:accuracy-measured-silver-1"
+                  },
+                  "energy": {
+                    "total-energy-consumed": 230,
+                    "data-source-accuracy": "ietf-power-energy-base:accuracy-measured-silver-1"
+                  },
+                  "component": [
+                    {
+                      "component-id": "ap-main",
+                      "references": {
+                        "ref-string": "ap-local-17"
+                      },
+                      "power": {
+                        "instantaneous-power": 7300,
+                        "nameplate-power": 20,
+                        "data-source-accuracy": "ietf-power-energy-base:accuracy-measured-silver-1"
+                      },
+                      "relationship": [
+                        {
+                          "type": "ietf-power-energy-base:powered-by",
+                          "peer-node": "r3",
+                          "peer-component": [
+                            {
+                              "peer-component": "lc2",
+                              "details": "PoE source on router r3 line card"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
