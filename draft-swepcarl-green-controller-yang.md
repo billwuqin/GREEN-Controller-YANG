@@ -97,7 +97,7 @@ describe which other components does this component powers or meters,
 and what it is powered-by.
 
 ~~~~
-{::include ./yang/tree/ietf-power-energy-network.tree}
+{::include ./yang/trees/ietf-power-energy-network.tree}
 ~~~~
 {: #pen-tree title="YANG tree diagram of the energy network" artwork-align="center"}
 
