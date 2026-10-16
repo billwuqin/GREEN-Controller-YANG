@@ -1,0 +1,7 @@
+<note title="Discussion Venues" removeInRFC="true">
+<t>Discussion of this document takes place on the
+    Getting Ready for Energy-Efficient Networking Working Group mailing list (green@ietf.org),
+    which is archived at <eref target="https://mailarchive.ietf.org/arch/browse/green/"/>.</t>
+<t>Source for this draft and an issue tracker can be found at
+    <eref target="https://github.com/billwuqin/GREEN-Controller-YANG"/>.</t>
+</note>
