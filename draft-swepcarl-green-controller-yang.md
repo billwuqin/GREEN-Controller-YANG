@@ -185,7 +185,10 @@ alternate names of this node in other contexts.  Then power and
 energy data for this component, and the energy relationships this
 component has with other components, such as powered-by or metering.
 
-
+~~~~ json
+{::include-fold ./examples/three-router-example@2026-09-26.json}
+~~~~
+{: #ex-contrl title="Three Router Example"}
 
 #  Audit Trail
 
