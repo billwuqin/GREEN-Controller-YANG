@@ -186,7 +186,6 @@ energy data for this component, and the energy relationships this
 component has with other components, such as powered-by or metering.
 
 ~~~~
-<CODE BEGINS> file "three-router-example@2026-09-26.json"
 {
   "ietf-yang-instance-data:instance-data-set": {
     "name": "three-router-example",
@@ -797,7 +796,6 @@ component has with other components, such as powered-by or metering.
     }
   }
 }
-<CODE ENDS>
 ~~~~
 
 #  Audit Trail
