@@ -1298,7 +1298,7 @@ the component's instantaneous-power, total-energy-consumed etc.  Each
 component may also declare its energy relations.  The relations
 describe which other components does this component powers or meters,
 and what it is powered-by.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
-<span id="name-yang-tree-diagram-of-the-en"></span><div id="tree">
+<span id="name-yang-tree-diagram-of-the-en"></span><div id="pen-tree">
 <figure id="figure-1">
           <div class="alignCenter art-text artwork" id="section-4.1-2.1">
 <pre>
@@ -1342,11 +1342,13 @@ module: ietf-power-energy-network
           |  +--rw certifications*           identityref
           +--rw relationship* [type peer-node]
              +--rw type              identityref
-             +--rw peer-node         -&gt; ../../../../../nw:node/node-id
+             +--rw peer-node
+             |       -&gt; ../../../../../nw:node/node-id
              +--rw peer-component* [peer-component]
-                +--rw peer-component    -&gt; ../../../../../../nw:node[nw:node-id=current()/../../peer-node]/pen:energy-node-attributes/component/component-id
+                +--rw peer-component    leafref
                 +--rw details?          string
-  augment /nwi:network-inventory/nwi:network-elements/nwi:network-element/nwi:components/nwi:component:
+  augment /nwi:network-inventory/nwi:network-elements
+            /nwi:network-element/nwi:components/nwi:component:
     +--ro power
     |  +--ro instantaneous-power?    int64
     |  +--ro nameplate-power?        uint32
@@ -1359,6 +1361,18 @@ module: ietf-power-energy-network
        +--ro data-source-accuracy?     identityref
        +--ro measurement-local?        boolean
        +--ro certifications*           identityref
+
+  grouping references:
+    +-- references
+       +-- ref-string?    string
+       +-- ref-ietf-hw?   string
+  grouping relationship-set:
+    +-- relationship* [type peer-node]
+       +-- type              identityref
+       +-- peer-node         -&gt; ../../../../../nw:node/node-id
+       +-- peer-component* [peer-component]
+          +-- peer-component    leafref
+          +-- details?          string
 </pre>
 </div>
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
