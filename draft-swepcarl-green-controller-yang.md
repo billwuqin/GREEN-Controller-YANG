@@ -97,65 +97,9 @@ describe which other components does this component powers or meters,
 and what it is powered-by.
 
 ~~~~
-module: ietf-power-energy-network
-
-  augment /nw:networks/nw:network/nw:network-types:
-    +--rw energy-network!
-  augment /nw:networks/nw:network/nw:node:
-    +--rw energy-node-attributes!
-       +--rw references
-       |  +--rw ref-string?    string
-       |  +--rw ref-ietf-hw?   string
-       +--rw power
-       |  +--rw instantaneous-power?    int64
-       |  +--rw nameplate-power?        uint32
-       |  +--rw data-source-accuracy?   identityref
-       |  +--rw power-factor?           power-factor
-       |  +--rw measurement-local?      boolean
-       +--rw energy
-       |  +--rw total-energy-consumed?    uint64
-       |  +--rw total-energy-delivered?   uint64
-       |  +--rw data-source-accuracy?     identityref
-       |  +--rw measurement-local?        boolean
-       |  +--rw certifications*           identityref
-       +--rw component* [component-id]
-          +--rw component-id    string
-          +--rw references
-          |  +--rw ref-string?    string
-          |  +--rw ref-ietf-hw?   string
-          +--rw power
-          |  +--rw instantaneous-power?    int64
-          |  +--rw nameplate-power?        uint32
-          |  +--rw data-source-accuracy?   identityref
-          |  +--rw power-factor?           power-factor
-          |  +--rw measurement-local?      boolean
-          +--rw energy
-          |  +--rw total-energy-consumed?    uint64
-          |  +--rw total-energy-delivered?   uint64
-          |  +--rw data-source-accuracy?     identityref
-          |  +--rw measurement-local?        boolean
-          |  +--rw certifications*           identityref
-          +--rw relationship* [type peer-node]
-             +--rw type              identityref
-             +--rw peer-node         -> ../../../../../nw:node/node-id
-             +--rw peer-component* [peer-component]
-                +--rw peer-component    -> ../../../../../../nw:node[nw:node-id=current()/../../peer-node]/pen:energy-node-attributes/component/component-id
-                +--rw details?          string
-  augment /nwi:network-inventory/nwi:network-elements/nwi:network-element/nwi:components/nwi:component:
-    +--ro power
-    |  +--ro instantaneous-power?    int64
-    |  +--ro nameplate-power?        uint32
-    |  +--ro data-source-accuracy?   identityref
-    |  +--ro power-factor?           power-factor
-    |  +--ro measurement-local?      boolean
-    +--ro energy
-       +--ro total-energy-consumed?    uint64
-       +--ro total-energy-delivered?   uint64
-       +--ro data-source-accuracy?     identityref
-       +--ro measurement-local?        boolean
-       +--ro certifications*           identityref
+{::include ./yang/tree/ietf-power-energy-network.tree}
 ~~~~
-{:#tree title="YANG tree diagram of the energy network" artwork-align="center"}
+{: #pen-tree title="YANG tree diagram of the energy network" artwork-align="center"}
 
 ##  Example
 
