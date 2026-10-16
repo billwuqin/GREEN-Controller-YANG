@@ -810,15 +810,19 @@ Any devices not reported?  Any double counting?
 
 ##  Types and Groupings
 
+~~~~
 <CODE BEGINS> file "ietf-power-energy-base.yang"
 {::include ./yang/ietf-power-energy-base.yang}
 <CODE ENDS>
+~~~~
 
 ##  Energy Network State
 
+~~~~
 <CODE BEGINS> file "ietf-power-energy-network.yang"
 {::include ./yang/ietf-power-energy-network.yang}
 <CODE ENDS>
+~~~~
 
 #  Security Considerations
 
