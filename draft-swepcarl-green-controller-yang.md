@@ -9,8 +9,8 @@ number:
 date:
 consensus: true
 v: 3
-area: AREA
-workgroup: WG Working Group
+area: "Operations and Management"
+workgroup: "Getting Ready for Energy-Efficient Networking"
 keyword:
  - next generation
  - unicorn
@@ -802,7 +802,7 @@ component has with other components, such as powered-by or metering.
 
 ##  Read provenance data
 
-//Follow Collection Graph 
+//Follow Collection Graph
 //Compare Collection Graph with Inventory
 Any devices not reported?  Any double counting?
 
