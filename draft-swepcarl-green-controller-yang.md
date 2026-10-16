@@ -29,8 +29,11 @@ informative:
 
 --- abstract
 
-TODO Abstract
-
+This document defines two YANG Data Models to support Controller level Energy Efficiency
+Management within a network. This document defines both 'nietf-power-energy-base'
+and 'ietf-power-energy-network' YANG modules to manage both dynamic energy
+consumption and capability-related attributes, providing both network-level
+and device-level views of power usage and inventory information.
 
 --- middle
 
